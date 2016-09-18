@@ -21,7 +21,7 @@ public class CurrentFile {
     private final Random     random;
     private final long       maxFileSize;
     private final FileFilter filter;
-    private       File       activeFile;
+                  File       activeFile;
 
     public CurrentFile(File aDir, long aMaxFileSize) {
         directory   = aDir;

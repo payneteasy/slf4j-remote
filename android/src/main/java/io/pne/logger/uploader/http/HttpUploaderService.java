@@ -25,7 +25,7 @@ public class HttpUploaderService {
 
     public HttpUploaderService(String aUploadUrl, String aToken, String aDeviceId, DirectoryCleaner aDirectoryCleaner) {
         directoryCleaner = aDirectoryCleaner;
-        uploadUrl        = aUploadUrl;
+        uploadUrl        = aUploadUrl + "/" + aDeviceId;
         token            = aToken;
         deviceId         = aDeviceId;
 
@@ -92,7 +92,7 @@ public class HttpUploaderService {
     private void copyStream(File aFile, OutputStream aOut) throws IOException {
         try {
             FileInputStream in = new FileInputStream(aFile);
-            byte[] buf = new byte[4048];
+            byte[] buf = new byte[4096];
             int size;
             while ( ( size = in.read(buf)) >= 0) {
                 aOut.write(buf, 0, size);

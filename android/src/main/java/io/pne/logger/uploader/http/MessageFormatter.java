@@ -8,7 +8,7 @@ import java.util.Date;
 public class MessageFormatter {
 
     public byte[] createMessage(Level aLevel, String aTag, String aMessage) {
-        String text = new Date() + " " + aTag + " " + aLevel + " " + aMessage + "\n";
+        String text = new Date() + " " + aLevel + " " + aTag + " " + aMessage + "\n";
         return text.getBytes(StandardCharsets.UTF_8);
     }
 

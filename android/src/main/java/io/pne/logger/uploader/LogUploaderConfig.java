@@ -20,4 +20,7 @@ public class LogUploaderConfig {
         return uploader;
     }
 
+    public void setCurrentUploader(ILogUploader aUploader) {
+        uploader = aUploader;
+    }
 }

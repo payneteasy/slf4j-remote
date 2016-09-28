@@ -9,7 +9,7 @@
 
     <groupId>com.github.payneteasy.slf4j-remote</groupId>
     <artifactId>android</artifactId>
-    <version>1.0-5</version>
+    <version>1.0-6</version>
 
     <name>android</name>
     <url>http://maven.apache.org</url>
@@ -22,6 +22,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
 
         <!-- ANDROID -->

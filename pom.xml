@@ -4,7 +4,7 @@
 
     <groupId>com.github.payneteasy</groupId>
     <artifactId>slf4j-remote</artifactId>
-    <version>1.0-4-SNAPSHOT</version>
+    <version>1.0-5</version>
     <packaging>pom</packaging>
     <name>example-root</name>
 
@@ -52,7 +52,8 @@
         <connection>scm:git:git@github.com:payneteasy/slf4j-remote.git</connection>
         <developerConnection>scm:git:git@github.com:payneteasy/slf4j-remote.git</developerConnection>
         <url>https://github.com/payneteasy/slf4j-remote</url>
-    </scm>
+      <tag>HEAD</tag>
+  </scm>
     
    <!--
     -      Distributions

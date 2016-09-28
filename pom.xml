@@ -4,7 +4,7 @@
 
     <groupId>com.github.payneteasy</groupId>
     <artifactId>slf4j-remote</artifactId>
-    <version>1.0-7</version>
+    <version>1.0-8</version>
     <packaging>pom</packaging>
     <name>example-root</name>
 
@@ -16,6 +16,7 @@
         <android.platform.version>19</android.platform.version>
         <slf4j.version>1.7.21</slf4j.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <android.version>4.1.1.4</android.version>
     </properties>
 
     <dependencyManagement>
@@ -30,9 +31,7 @@
             <dependency>
                 <groupId>com.google.android</groupId>
                 <artifactId>android</artifactId>
-                <version>
-                    4.1.1.4
-                </version>
+                <version>${android.version}</version>
                 <scope>provided</scope>
             </dependency>
 

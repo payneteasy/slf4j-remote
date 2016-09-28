@@ -47,6 +47,14 @@
         </dependencies>
     </dependencyManagement>
 
+    <url>https://github.com/payneteasy/slf4j-remote</url>
+
+    <scm>
+        <connection>scm:git:git@github.com:payneteasy/slf4j-remote.git</connection>
+        <developerConnection>scm:git:git@github.com:payneteasy/slf4j-remote.git</developerConnection>
+        <url>https://github.com/payneteasy/slf4j-remote</url>
+    </scm>
+    
    <!--
     -      Distributions
     -->

@@ -4,7 +4,7 @@
 
     <groupId>com.github.payneteasy</groupId>
     <artifactId>slf4j-remote</artifactId>
-    <version>1.0-9</version>
+    <version>1.0-10</version>
     <packaging>pom</packaging>
     <name>example-root</name>
 
@@ -25,6 +25,7 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
+                <scope>provided</scope>
             </dependency>
 
             <!-- ANDROID -->

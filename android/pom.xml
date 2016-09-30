@@ -4,12 +4,12 @@
     <parent>
         <groupId>com.github.payneteasy</groupId>
         <artifactId>slf4j-remote</artifactId>
-        <version>1.0-9</version>
+        <version>1.0-10</version>
     </parent>
 
     <groupId>com.github.payneteasy.slf4j-remote</groupId>
     <artifactId>android</artifactId>
-    <version>1.0-9</version>
+    <version>1.0-10</version>
 
     <name>android</name>
     <url>http://maven.apache.org</url>
@@ -23,6 +23,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.21</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- ANDROID -->

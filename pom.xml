@@ -4,12 +4,13 @@
 
     <groupId>com.github.payneteasy</groupId>
     <artifactId>slf4j-remote</artifactId>
-    <version>1.0-10</version>
+    <version>1.0-11</version>
     <packaging>pom</packaging>
     <name>example-root</name>
 
     <modules>
         <module>android</module>
+        <module>sfl4j-binder</module>
     </modules>
 
     <properties>
@@ -20,7 +21,15 @@
     </properties>
 
     <dependencyManagement>
+
         <dependencies>
+
+            <dependency>
+                <groupId>com.github.payneteasy.slf4j-remote</groupId>
+                <artifactId>android</artifactId>
+                <version>1.0-11</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>

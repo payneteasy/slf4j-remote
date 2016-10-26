@@ -5,6 +5,7 @@ import io.pne.logger.uploader.ILogUploader;
 import org.slf4j.event.Level;
 
 import java.io.File;
+import java.net.Proxy;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadFactory;
 
@@ -21,14 +22,23 @@ public class HttpLogUploader implements ILogUploader {
     private final MessageFormatter    messageFormatter = new MessageFormatter();
     private final CurrentFile         currentFile;
 
-    public HttpLogUploader(String aUploadUrl, String aAccessToken, String aDeviceId, File aDir, int aMemoryBufferSize, long aMaxFileSize, int aFilesCount, long aDirectorySize) {
+    public HttpLogUploader(String aUploadUrl, String aAccessToken, String aDeviceId, File aDir
+            , int aMemoryBufferSize, long aMaxFileSize, int aFilesCount, long aDirectorySize
+    ) {
+        this(aUploadUrl, aAccessToken, aDeviceId, aDir, aMemoryBufferSize, aMaxFileSize, aFilesCount, aDirectorySize, null);
+    }
+
+    public HttpLogUploader(String aUploadUrl, String aAccessToken, String aDeviceId, File aDir
+            , int aMemoryBufferSize, long aMaxFileSize, int aFilesCount, long aDirectorySize
+            , Proxy aProxy
+    ) {
 
         if(!aDir.exists() || !aDir.isDirectory()) {
             LOG.error("Directory {} does not exist", aDir.getAbsolutePath());
         }
 
         currentFile      = new CurrentFile(aDir, aMaxFileSize);
-        uploaderService  = new HttpUploaderService(aUploadUrl, aAccessToken, aDeviceId, new DirectoryCleaner(READY_SUFFIX, aFilesCount, aDirectorySize, aDir));
+        uploaderService  = new HttpUploaderService(aUploadUrl, aAccessToken, aDeviceId, new DirectoryCleaner(READY_SUFFIX, aFilesCount, aDirectorySize, aDir), aProxy);
         buffer           = new MemoryBuffer(aMemoryBufferSize);
 
         executor         = newSingleThreadExecutor(new ThreadFactory() {

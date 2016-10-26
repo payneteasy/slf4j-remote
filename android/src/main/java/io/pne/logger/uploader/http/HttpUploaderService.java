@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.Proxy;
 import java.net.URL;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadFactory;
@@ -22,8 +23,10 @@ public class HttpUploaderService {
     private final String           uploadUrl;
     private final String           token;
     private final String           deviceId;
+    private final Proxy            proxy;
 
-    public HttpUploaderService(String aUploadUrl, String aToken, String aDeviceId, DirectoryCleaner aDirectoryCleaner) {
+    public HttpUploaderService(String aUploadUrl, String aToken, String aDeviceId, DirectoryCleaner aDirectoryCleaner, Proxy aProxy) {
+        proxy            = aProxy;
         directoryCleaner = aDirectoryCleaner;
         uploadUrl        = aUploadUrl + "/" + aDeviceId;
         token            = aToken;
@@ -63,7 +66,9 @@ public class HttpUploaderService {
     private void uploadFile(File aFile) throws IOException {
         LOG.info("Uploading file {} to {}", aFile.getName(), uploadUrl);
 
-        HttpURLConnection con = (HttpURLConnection) new URL(uploadUrl).openConnection();
+        HttpURLConnection con = proxy != null
+                ? (HttpURLConnection) new URL(uploadUrl).openConnection(proxy)
+                : (HttpURLConnection) new URL(uploadUrl).openConnection();
         con.setReadTimeout    (30 * 1000);
         con.setConnectTimeout (30 * 1000);
 

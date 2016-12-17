@@ -4,7 +4,10 @@ import android.util.Log;
 import io.pne.logger.uploader.ILogUploader;
 import org.slf4j.event.Level;
 
+import java.io.PrintStream;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AndroidLogUploader implements ILogUploader {
 
@@ -37,11 +40,9 @@ public class AndroidLogUploader implements ILogUploader {
             }
             Log.println(priority, aTag, aMessage);
         } else {
-            if(aLevel == Level.ERROR) {
-                System.err.println(aLevel+" " + aTag + " " + aMessage);
-            } else {
-                System.out.println(aLevel+" " + aTag + " " + aMessage);
-            }
+            String dateString = new SimpleDateFormat("HH:mm:ss.SSS").format(new Date());
+            PrintStream out = aLevel == Level.ERROR ? System.err : System.out;
+            out.println(dateString + " " + aLevel+" " + aTag + " " + aMessage);
         }
     }
 }

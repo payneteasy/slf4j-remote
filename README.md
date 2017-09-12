@@ -47,6 +47,7 @@ dependencies {
 How to use
 ----------
 
+h3. initialise the uploader
 ```java
 HttpLogUploader httpUploader = new HttpLogUploader(
           "https://your-server.com/log-upload"     // url
@@ -60,7 +61,59 @@ HttpLogUploader httpUploader = new HttpLogUploader(
 );
 
 LogUploaderConfig.getInstance()
-        .setCurrentUploader(new CompositorLogUploader(new AndroidLogUploader(), UPLOADER));
+        .setCurrentUploader(new CompositorLogUploader(new AndroidLogUploader(), httpUploader));
 ```
 
+h3. Log a message
+```java
+        LogUploaderConfig.getInstance()
+                .getCurrentUploader()
+                .upload(priority, name, message);
+```
 
+h3. How for format a message with slf4j-api
+```java
+private void formatAndLog(Level priority, String format, Object... argArray) {
+        //noinspection ConstantConditions
+        FormattingTuple ft = MessageFormatter.arrayFormat(format, argArray);
+        _log(priority, ft.getMessage(), ft.getThrowable());
+}
+
+   private void _log(Level priority, String message, Throwable throwable) {
+        if (throwable != null) {
+            message += '\n' + getStackTraceString(throwable);
+        }
+
+        LogUploaderConfig.getInstance()
+                .getCurrentUploader()
+                .upload(priority, name, message);
+    }
+    
+    public static String getStackTraceString(Throwable tr) {
+        if (tr == null) {
+            return "";
+        }
+
+        // This is to reduce the amount of log spew that apps do in the non-error
+        // condition of the network being unavailable.
+        Throwable t = tr;
+        while (t != null) {
+            if (t instanceof UnknownHostException) {
+                return "";
+            }
+            t = t.getCause();
+        }
+        
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        tr.printStackTrace(pw);
+        pw.flush();
+        return sw.toString();
+    }
+
+    private void log(Level priority, String message, Throwable throwable) {
+        //noinspection ConstantConditions
+        _log(priority, message, throwable);
+    }
+    
+```

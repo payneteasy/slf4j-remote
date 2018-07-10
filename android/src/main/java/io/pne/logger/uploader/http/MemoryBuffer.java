@@ -10,7 +10,7 @@ public class MemoryBuffer {
     }
 
     public boolean hasSpace(int aMessageLength) {
-        return buffer.length <= position + aMessageLength;
+        return position + aMessageLength <= buffer.length;
     }
 
     /**

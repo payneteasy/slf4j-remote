@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.File;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class MemoryBufferTest {
@@ -13,7 +14,7 @@ public class MemoryBufferTest {
     public void append_11_of_10() {
         MemoryBuffer buffer = new MemoryBuffer(10);
         buffer.append(new byte[11]);
-        assertTrue("Buffer gas not got space", buffer.hasSpace(1));
+        assertFalse("Buffer should not have any space", buffer.hasSpace(1));
         assertEquals(10, buffer.position);
         CurrentFile file = new CurrentFile(new File("/tmp"), 100);
         try {
@@ -35,7 +36,7 @@ public class MemoryBufferTest {
         assertEquals(7, buffer.position);
 
         assertTrue("Buffer must have a space for additional 3 bytes", buffer.hasSpace(3));
-        assertTrue("Buffer must not have a space for additional 4 bytes", buffer.hasSpace(4));
+        assertFalse("Buffer must not have space for additional 4 bytes", buffer.hasSpace(4));
         CurrentFile file = new CurrentFile(new File("/tmp"), 100);
         try {
             buffer.clearToFile(file);

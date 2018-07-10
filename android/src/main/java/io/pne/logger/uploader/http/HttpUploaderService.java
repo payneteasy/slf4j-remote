@@ -64,7 +64,7 @@ public class HttpUploaderService {
     }
 
     private void uploadFile(File aFile) throws IOException {
-        LOG.info("Uploading file {} to {}", aFile.getName(), uploadUrl);
+        LOG.info("Uploading file {} with {} bytes to {}", aFile.getName(), aFile.length(), uploadUrl);
 
         HttpURLConnection con = proxy != null
                 ? (HttpURLConnection) new URL(uploadUrl).openConnection(proxy)
